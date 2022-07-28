@@ -1,11 +1,11 @@
 #
-# Copyright (C) 2021-2022 by TeamYukki@Github, < https://github.com/YukkiChatBot >.
+# Müəllif hüququ (C) 2021-2022 by offlineflood@Github, < https://github.com/ChatBot >.
 #
-# This file is part of < https://github.com/TeamYukki/YukkiChatBot > project,
-# and is released under the "GNU v3.0 License Agreement".
-# Please see < https://github.com/TeamYukki/YukkiChatBot/blob/master/LICENSE >
+# Bu faylın bir hissəsidir < https://github.com/offlineflood/ChatBot > layihə,
+# və "GNU v3.0 Lisenziya Müqaviləsi" əsasında buraxılır".
+# Zəhmət olmasa baxın < https://github.com/offlineflood/ChatBot/blob/master/LICENSE >
 #
-# All rights reserved.
+# Bütün hüquqlar qorunur.
 #
 
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
@@ -23,7 +23,7 @@ if MONGO_DB_URI != None:
     modedb = db.mode
     modelist = {}
 
-    # Served Users
+    # Xidmət edilən İstifadəçilər.
     async def is_served_user(user_id: int) -> bool:
         user = await usersdb.find_one({"user_id": user_id})
         if not user:
@@ -42,7 +42,7 @@ if MONGO_DB_URI != None:
             return
         return await usersdb.insert_one({"user_id": user_id})
 
-    # Banned Users
+    # Qadağan edilmiş İstifadəçilər.
     async def get_banned_users() -> list:
         results = []
         async for user in blockeddb.find({"user_id": {"$gt": 0}}):
@@ -73,7 +73,7 @@ if MONGO_DB_URI != None:
             return
         return await blockeddb.delete_one({"user_id": user_id})
 
-    # Forward Mode
+    # İrəli rejimi.
     async def is_group() -> bool:
         chat_id = 123
         mode = modelist.get(chat_id)
