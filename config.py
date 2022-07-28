@@ -1,11 +1,11 @@
 #
-# Copyright (C) 2021-2022 by TeamYukki@Github, < https://github.com/YukkiChatBot >.
+#  Müəllif hüququ (C) 2021-2022 by offlineflood@Github, < https://github.com/ChatBot >.
 #
-# This file is part of < https://github.com/TeamYukki/YukkiChatBot > project,
-# and is released under the "GNU v3.0 License Agreement".
-# Please see < https://github.com/TeamYukki/YukkiChatBot/blob/master/LICENSE >
+# Bu faylın bir hissəsidir < https://github.com/offlineflood/ChatBot > layihə,
+# və "GNU v3.0 Lisenziya Müqaviləsi" əsasında buraxılır".
+# Zəhmət olmasa baxın < https://github.com/offlineflood/ChatBot/blob/master/LICENSE >
 #
-# All rights reserved.
+# Bütün hüquqlar qorunur.
 #
 
 from os import getenv
@@ -14,26 +14,26 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Get it from my.telegram.org
+# my.telegram.org saytından əldə edin.
 API_ID = int(getenv("API_ID"))
 API_HASH = getenv("API_HASH")
 
-## Get it from @Botfather in Telegram.
+## Telegram-da @Botfather-dən əldə edin.
 BOT_TOKEN = getenv("BOT_TOKEN")
 
-# SUDO USERS
+# SUDO İSTİFADƏÇİLƏRİ
 SUDO_USER = list(
     map(int, getenv("SUDO_USER", "").split())
-)  # Input type must be interger
+)  # Daxiletmə növü tam ədəd olmalıdır.
 
-# You'll need a Private Group ID for this.
+# Bunun üçün Şəxsi Qrup ID-sinə ehtiyacınız olacaq.
 LOG_GROUP_ID = int(getenv("LOG_GROUP_ID"))
 
-# Message to display when someone starts your bot
+# Kimsə botunuzu işə saldıqda göstəriləcək mesaj.
 PRIVATE_START_MESSAGE = getenv(
     "PRIVATE_START_MESSAGE",
     "Hello! Welcome to my Personal Assistant Bot",
 )
 
-# Database to save your chats and stats... Get MongoDB:-  https://notreallyshikhar.gitbook.io/yukkimusicbot/deployment/mongodb#4.-youll-see-a-deploy-cloud-database-option.-please-select-shared-hosting-under-free-plan-here
+# Söhbətlərinizi və statistikalarınızı saxlamaq üçün verilənlər bazası... MongoDB əldə edin:-  https://offline.gitbook.io/ChatBot/deployment/mongodb#4.-youll-see-a-deploy-cloud-database-option.-please-select-shared-hosting-under-free-plan-here
 MONGO_DB_URI = getenv("MONGO_DB_URI", None)
