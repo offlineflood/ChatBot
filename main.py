@@ -1,11 +1,11 @@
 #
-# Copyright (C) 2021-2022 by TeamYukki@Github, < https://github.com/YukkiChatBot >.
+# Müəllif hüququ (C) 2021-2022 by offlineflood@Github, < https://github.com/ChatBot >.
 #
-# This file is part of < https://github.com/TeamYukki/YukkiChatBot > project,
-# and is released under the "GNU v3.0 License Agreement".
-# Please see < https://github.com/TeamYukki/YukkiChatBot/blob/master/LICENSE >
+# Bu faylın bir hissəsidir < https://github.com/offlineflood/ChatBot > layihə,
+# və "GNU v3.0 Lisenziya Müqaviləsi" əsasında buraxılır".
+# Zəhmət olmasa baxın < https://github.com/offlineflood/ChatBot/blob/master/LICENSE >
 #
-# All rights reserved.
+# Bütün hüquqlar qorunur.
 #
 
 import asyncio
@@ -25,7 +25,7 @@ loop = asyncio.get_event_loop()
 SUDO_USERS = config.SUDO_USER
 
 app = pyrogram.Client(
-    ":YukkiBot:",
+    ":DegGxiM:",
     config.API_ID,
     config.API_HASH,
     bot_token=config.BOT_TOKEN,
@@ -51,9 +51,9 @@ async def init():
     async def mode_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI var müəyyən edilməyib. Zəhmət olmasa əvvəlcə onu müəyyənləşdirin."
             )
-        usage = "**Usage:**\n\n/mode [group | private]\n\n**Group**: All the incoming messages will be forwarded to Log group.\n\n**Private**: All the incoming messages will be forwarded to the Private Messages of SUDO_USERS"
+        usage = "**İstifadə:**\n\n/rejim [qrup | şəxsi]\n\n**Qrup**: Bütün gələn mesajlar Giriş qrupuna yönləndiriləcək.\n\n**Şəxsi**: Bütün gələn mesajlar SUDO_USERS Şəxsi Mesajlarına yönləndiriləcək"
         if len(message.command) != 2:
             return await message.reply_text(usage)
         state = message.text.split(None, 1)[1].strip()
@@ -61,12 +61,12 @@ async def init():
         if state == "group":
             await mongo.group_on()
             await message.reply_text(
-                "Group Mode Enabled. All the incoming messages will be forwarded to LOG Group"
+                "Qrup Rejimi Aktivdir. Bütün daxil olan mesajlar LOG Group-a yönləndiriləcək"
             )
         elif state == "private":
             await mongo.group_off()
             await message.reply_text(
-                "Private Mode Enabled. All the incoming messages will be forwarded to Private Message of all SUDO_USERs"
+                "Şəxsi Rejim Aktivdir. Bütün gələn mesajlar bütün SUDO_USER-lərin Şəxsi Mesajına yönləndiriləcək"
             )
         else:
             await message.reply_text(usage)
@@ -77,12 +77,12 @@ async def init():
     async def block_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI var müəyyən edilməyib. Zəhmət olmasa əvvəlcə onu müəyyənləşdirin"
             )
         if message.reply_to_message:
             if not message.reply_to_message.forward_sender_name:
                 return await message.reply_text(
-                    "Please reply to forwarded messages only."
+                    "Yalnız yönləndirilmiş mesajlara cavab verin."
                 )
             replied_id = message.reply_to_message_id
             try:
@@ -90,23 +90,23 @@ async def init():
             except Exception as e:
                 print(e)
                 return await message.reply_text(
-                    "Failed to fetch user. You might've restarted bot or some error happened. Please check logs"
+                    "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
                 )
             if await mongo.is_banned_user(replied_user_id):
-                return await message.reply_text("Already Blocked")
+                return await message.reply_text("Artıq Blok edilib")
             else:
                 await mongo.add_banned_user(replied_user_id)
-                await message.reply_text("Banned User from The Bot")
+                await message.reply_text("Botdan Qadağan edilmiş İstifadəçi")
                 try:
                     await app.send_message(
                         replied_user_id,
-                        "You're now banned from using the Bot by admins.",
+                        "İndi adminlər tərəfindən Botdan istifadə etmək sizə qadağa qoyulub.",
                     )
                 except:
                     pass
         else:
             return await message.reply_text(
-                "Reply to a user's forwarded message to block him from using the bot"
+                "İstifadəçinin botdan istifadəsinə mane olmaq üçün onun yönləndirilmiş mesajına cavab verin"
             )
 
     @app.on_message(
@@ -115,12 +115,12 @@ async def init():
     async def unblock_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI var müəyyən edilməyib. Zəhmət olmasa əvvəlcə onu müəyyənləşdirin"
             )
         if message.reply_to_message:
             if not message.reply_to_message.forward_sender_name:
                 return await message.reply_text(
-                    "Please reply to forwarded messages only."
+                    "Yalnız yönləndirilmiş mesajlara cavab verin."
                 )
             replied_id = message.reply_to_message_id
             try:
@@ -128,25 +128,25 @@ async def init():
             except Exception as e:
                 print(e)
                 return await message.reply_text(
-                    "Failed to fetch user. You might've restarted bot or some error happened. Please check logs"
+                    "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
                 )
             if not await mongo.is_banned_user(replied_user_id):
-                return await message.reply_text("Already UnBlocked")
+                return await message.reply_text("Artıq Blokdan Çıxarılıb")
             else:
                 await mongo.remove_banned_user(replied_user_id)
                 await message.reply_text(
-                    "Unblocked User from The Bot"
+                    "Botdan blokdan çıxarılan istifadəçi"
                 )
                 try:
                     await app.send_message(
                         replied_user_id,
-                        "You're now unbanned from the Bot by admins.",
+                        "İndi adminlər tərəfindən Botdan bloklanmısınız.",
                     )
                 except:
                     pass
         else:
             return await message.reply_text(
-                "Reply to a user's forwarded message to unblock him from the bot"
+                "İstifadəçini botdan blokdan çıxarmaq üçün onun yönləndirilmiş mesajına cavab verin"
             )
 
     @app.on_message(
@@ -155,17 +155,17 @@ async def init():
     async def stats_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI var müəyyən edilməyib. Zəhmət olmasa əvvəlcə onu müəyyənləşdirin"
             )
         served_users = len(await mongo.get_served_users())
         blocked = await mongo.get_banned_count()
-        text = f""" **ChatBot Stats:**
+        text = f""" **DegGxiM Statistikası :**
         
-**Python Version :** {pyver.split()[0]}
-**Pyrogram Version :** {pyrover}
+**Python versiyası :** {pyver.split()[0]}
+**Piroqram versiyası :** {pyrover}
 
-**Served Users:** {served_users} 
-**Blocked Users:** {blocked}"""
+**Xidmət edilən İstifadəçilər :** {served_users} 
+**Bloklanmış İstifadəçilər :** {blocked}"""
         await message.reply_text(text)
 
     @app.on_message(
@@ -174,7 +174,7 @@ async def init():
     async def broadcast_func(_, message: Message):
         if db is None:
             return await message.reply_text(
-                "MONGO_DB_URI var not defined. Please define it first"
+                "MONGO_DB_URI var müəyyən edilməyib. Zəhmət olmasa əvvəlcə onu müəyyənləşdirin"
             )
         if message.reply_to_message:
             x = message.reply_to_message.message_id
@@ -182,7 +182,7 @@ async def init():
         else:
             if len(message.command) < 2:
                 return await message.reply_text(
-                    "**Usage**:\n/broadcast [MESSAGE] or [Reply to a Message]"
+                    "**İstifadə**:\n/broadcast [MESSAGE] və ya [Mesajı Cavab]"
                 )
             query = message.text.split(None, 1)[1]
 
@@ -208,7 +208,7 @@ async def init():
                 pass
         try:
             await message.reply_text(
-                f"**Broadcasted Message to {susr} Users.**"
+                f"**Mesajı yayımlayın {susr} İstifadəçilər.**"
             )
         except:
             pass
@@ -228,7 +228,7 @@ async def init():
                     return
                 if not message.reply_to_message.forward_sender_name:
                     return await message.reply_text(
-                        "Please reply to forwarded messages only."
+                        "Yalnız yönləndirilmiş mesajlara cavab verin."
                     )
                 replied_id = message.reply_to_message_id
                 try:
@@ -236,7 +236,7 @@ async def init():
                 except Exception as e:
                     print(e)
                     return await message.reply_text(
-                        "Failed to fetch user. You might've restarted bot or some error happened. Please check logs"
+                        "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
                     )
                 try:
                     return await app.copy_message(
@@ -247,7 +247,7 @@ async def init():
                 except Exception as e:
                     print(e)
                     return await message.reply_text(
-                        "Failed to send the message, User might have blocked the bot or something wrong happened. Please check logs"
+                        "Mesajı göndərmək alınmadı, İstifadəçi botu bloklamış və ya səhv bir şey baş vermiş ola bilər. Zəhmət olmasa qeydləri yoxlayın"
                     )
         else:
             if await mongo.is_group():
@@ -285,14 +285,14 @@ async def init():
             replied_id = message.reply_to_message_id
             if not message.reply_to_message.forward_sender_name:
                 return await message.reply_text(
-                    "Please reply to forwarded messages only."
+                    "Yalnız yönləndirilmiş mesajlara cavab verin."
                 )
             try:
                 replied_user_id = save[replied_id]
             except Exception as e:
                 print(e)
                 return await message.reply_text(
-                    "Failed to fetch user. You might've restarted bot or some error happened. Please check logs"
+                    "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
                 )
             try:
                 return await app.copy_message(
@@ -303,10 +303,10 @@ async def init():
             except Exception as e:
                 print(e)
                 return await message.reply_text(
-                    "Failed to send the message, User might have blocked the bot or something wrong happened. Please check logs"
+                    "Mesajı göndərmək alınmadı, İstifadəçi botu bloklamış və ya səhv bir şey baş vermiş ola bilər. Zəhmət olmasa qeydləri yoxlayın"
                 )
 
-    print("[LOG] - Yukki Chat Bot Started")
+    print("[LOG] - DegGixM Akdifdir Başladı")
     await idle()
 
 
