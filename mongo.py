@@ -19,7 +19,7 @@ if MONGO_DB_URI != None:
     db = mongo.ChatBot
 
     usersdb = db.users
-   blockeddb = db.block
+#   blockeddb = db.block
     modedb = db.mode
     modelist = {}
 
