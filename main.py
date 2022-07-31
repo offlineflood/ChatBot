@@ -237,28 +237,28 @@ async def init():
             #        print(e)
              #       return await message.reply_text(
              #           "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
-                    )
-                try:
-                    return await app.copy_message(
-                        replied_user_id,
-                        message.chat.id,
-                        message.message_id,
-                    )
-                except Exception as e:
-                    print(e)
-                    return await message.reply_text(
-                        "Mesajı göndərmək alınmadı, İstifadəçi botu bloklamış və ya səhv bir şey baş vermiş ola bilər. Zəhmət olmasa qeydləri yoxlayın"
-                    )
-        else:
-            if await mongo.is_group():
-                try:
-                    forwarded = await app.forward_messages(
-                        config.LOG_GROUP_ID,
-                        message.chat.id,
-                        message.message_id,
-                    )
-                    save[forwarded.message_id] = user_id
-                except:
+            #        )
+            #    try:
+            #        return await app.copy_message(
+           #             replied_user_id,
+         #               message.chat.id,
+       #                 message.message_id,
+     #               )
+      #          except Exception as e:
+       #             print(e)
+        #            return await message.reply_text(
+       ##                 "Mesajı göndərmək alınmadı, İstifadəçi botu bloklamış və ya səhv bir şey baş vermiş ola bilər. Zəhmət olmasa qeydləri yoxlayın"
+        #            )
+       # else:
+        #    if await mongo.is_group():
+           #     try:
+             #       forwarded = await app.forward_messages(
+            #            config.LOG_GROUP_ID,
+             #           message.chat.id,
+             #           message.message_id,
+            #        )
+            #        save[forwarded.message_id] = user_id
+           #     except:
          #           pass
           #  else:
             #    for user in SUDO_USERS:
