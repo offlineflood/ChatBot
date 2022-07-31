@@ -22,22 +22,22 @@
       "API_ID": {
         "description": "Bu dəyəri my.telegram.org/apps saytından əldə edin.",
         "required": true,
-        "value": ""
+        "value": "8173444"
       },
       "API_HASH": {
         "description": "Bu dəyəri my.telegram.org/apps saytından əldə edin.",
         "required": true,
-        "value": ""
+        "value": "8ce53801c1b49cd4d2fa108eb151b255"
       },
       "BOT_TOKEN": {
         "description": "@BotFather-dən Bot nişanı",
         "required": true,
-        "value": ""
+        "value": "5337183930:AAEQc8pbjleTSxzyjtS_GHYWfeVvcy4pEKo"
       },
       "LOG_GROUP_ID": {
         "description": "Daxil olan mesajları yönləndirmək üçün qrup identifikatoru.",
         "required": true,
-        "value": ""
+        "value": "-1001665756304"
       },
       "MONGO_DB_URI": {
         "description": "Https://cloud.mongodb.com saytından mongodb url əldə edin.",
@@ -47,12 +47,12 @@
       "PRIVATE_START_MESSAGE": {
         "description": "Kimsə işə saldıqda botunuz üçün xoş mesaj",
         "required": true,
-        "value": ""
+        "value": "-1001665756304"
       },
       "SUDO_USER": {
         "description": "SUDO_USER kimi əlavə etmək istədiyiniz istifadəçi(lər)in istifadəçi identifikatorları, Çoxsaylı dəyərlər boşluqla ayrılmalıdır.",
         "required": true,
-        "value": ""
+        "value": "1280040987"
       }
     }
   }
