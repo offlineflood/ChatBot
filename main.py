@@ -213,30 +213,30 @@ async def init():
         except:
             pass
 
-    @app.on_message(filters.private & ~filters.edited)
-    async def incoming_private(_, message):
-        user_id = message.from_user.id
-        if await mongo.is_banned_user(user_id):
-            return
-        if user_id in SUDO_USERS:
-            if message.reply_to_message:
-                if (
-                    message.text == "/unblock"
-                    or message.text == "/block"
-                    or message.text == "/broadcast"
-                ):
-                    return
-                if not message.reply_to_message.forward_sender_name:
-                    return await message.reply_text(
-                        "Yalnız yönləndirilmiş mesajlara cavab verin."
-                    )
-                replied_id = message.reply_to_message_id
-                try:
-                    replied_user_id = save[replied_id]
-                except Exception as e:
-                    print(e)
-                    return await message.reply_text(
-                        "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
+  #  @app.on_message(filters.private & ~filters.edited)
+  #  async def incoming_private(_, message):
+   #     user_id = message.from_user.id
+   #     if await mongo.is_banned_user(user_id):
+    #        return
+    #    if user_id in SUDO_USERS:
+      #      if message.reply_to_message:
+      #          if (
+      #              message.text == "/unblock"
+       #             or message.text == "/block"
+        #            or message.text == "/broadcast"
+         #       ):
+          #          return
+         #       if not message.reply_to_message.forward_sender_name:
+          #          return await message.reply_text(
+           #             "Yalnız yönləndirilmiş mesajlara cavab verin."
+          #          )
+           #     replied_id = message.reply_to_message_id
+            #    try:
+           #         replied_user_id = save[replied_id]
+            #    except Exception as e:
+            #        print(e)
+             #       return await message.reply_text(
+             #           "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
                     )
                 try:
                     return await app.copy_message(
@@ -259,52 +259,52 @@ async def init():
                     )
                     save[forwarded.message_id] = user_id
                 except:
-                    pass
-            else:
-                for user in SUDO_USERS:
-                    try:
-                        forwarded = await app.forward_messages(
-                            user, message.chat.id, message.message_id
-                        )
-                        save[forwarded.message_id] = user_id
-                    except:
-                        pass
-
-    @app.on_message(
-        filters.group & ~filters.edited & filters.user(SUDO_USERS),
-        group=grouplist,
-    )
-    async def incoming_groups(_, message):
-        if message.reply_to_message:
-            if (
-                message.text == "/unblock"
-                or message.text == "/block"
-                or message.text == "/broadcast"
-            ):
-                return
-            replied_id = message.reply_to_message_id
-            if not message.reply_to_message.forward_sender_name:
-                return await message.reply_text(
-                    "Yalnız yönləndirilmiş mesajlara cavab verin."
-                )
-            try:
-                replied_user_id = save[replied_id]
-            except Exception as e:
-                print(e)
-                return await message.reply_text(
-                    "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
-                )
-            try:
-                return await app.copy_message(
-                    replied_user_id,
-                    message.chat.id,
-                    message.message_id,
-                )
-            except Exception as e:
-                print(e)
-                return await message.reply_text(
-                    "Mesajı göndərmək alınmadı, İstifadəçi botu bloklamış və ya səhv bir şey baş vermiş ola bilər. Zəhmət olmasa qeydləri yoxlayın"
-                )
+         #           pass
+          #  else:
+            #    for user in SUDO_USERS:
+             #       try:
+              #          forwarded = await app.forward_messages(
+             #               user, message.chat.id, message.message_id
+            #            )
+             #           save[forwarded.message_id] = user_id
+             #       except:
+               #         pass
+#
+   # @app.on_message(
+   #     filters.group & ~filters.edited & filters.user(SUDO_USERS),
+     #   group=grouplist,
+  #  )
+   # async def incoming_groups(_, message):
+      #  if message.reply_to_message:
+         #   if (
+            #    message.text == "/unblock"
+            #    or message.text == "/block"
+           #     or message.text == "/broadcast"
+           # ):
+           #     return
+          #  replied_id = message.reply_to_message_id
+         #   if not message.reply_to_message.forward_sender_name:
+         #       return await message.reply_text(
+         #           "Yalnız yönləndirilmiş mesajlara cavab verin."
+          #      )
+           # try:
+           #     replied_user_id = save[replied_id]
+          #  except Exception as e:
+            #    print(e)
+            #    return await message.reply_text(
+            #        "İstifadəçini əldə etmək alınmadı. Siz botu yenidən işə salmısınız və ya xəta baş verib. Zəhmət olmasa qeydləri yoxlayın"
+          #      )
+         #   try:
+           #     return await app.copy_message(
+            #        replied_user_id,
+            #        message.chat.id,
+           #         message.message_id,
+          #      )
+         #   except Exception as e:
+           #     print(e)
+           #     return await message.reply_text(
+            #        "Mesajı göndərmək alınmadı, İstifadəçi botu bloklamış və ya səhv bir şey baş vermiş ola bilər. Zəhmət olmasa qeydləri yoxlayın"
+              #  )
 
     print("[LOG] - DegGixM Akdifdir Başladı")
     await idle()
